@@ -4,6 +4,7 @@ bodyParser = require('body-parser'),
 PORT = process.env.PORT || 8080,
 mongoose = require('mongoose'),
 passport = require('passport'),
+flash = require('connect-flash'),
 expressSession = require('express-session'),
 morgan = require('morgan');
 require('dotenv/config');
@@ -24,12 +25,19 @@ app.use(expressSession({
 }))
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 //Models
 const Category = require('./models/category');
 
 //Middleware for All your routes
 app.use((req, res, next) => {
+    // assign success msg to each route
+    res.locals.success = req.flash('success')
+
+    // assign error msg to each route
+    res.locals.error = req.flash('error')
+
     // assign each route the user object
     res.locals.user = req.user;
     next();
