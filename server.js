@@ -15,5 +15,11 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:true}));
 
+//Routes
+const indexRoutes = require('./routes/index'),
+authRoutes = require('./routes/auth');
+app.use('/',indexRoutes);
+app.use('/auth',authRoutes);
+
 //Server started at port PORT
 app.listen(PORT,() => console.log(`Server listening at port ${PORT}`))
