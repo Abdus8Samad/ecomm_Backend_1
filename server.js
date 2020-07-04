@@ -15,6 +15,7 @@ mongoose.connect(process.env.MONGO_URI,{useNewUrlParser:true,useUnifiedTopology:
 .catch(err => console.log(err));
 
 app.use(express.static(__dirname,'/public'));
+app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:true}));
