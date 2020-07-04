@@ -9,6 +9,11 @@ expressSession = require('express-session'),
 morgan = require('morgan');
 require('dotenv/config');
 
+//Authentication Strategies
+const localAuth = require('./auth/localauth'),
+googleAuth = require('./auth/gplus'),
+facebookAuth = require('./auth/fbauth');
+
 //Connect to the db
 mongoose.connect(process.env.MONGO_URI,{useNewUrlParser:true,useUnifiedTopology:true,useCreateIndex:true})
 .then(() => console.log('Connected to the DB'))
