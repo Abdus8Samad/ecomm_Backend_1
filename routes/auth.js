@@ -1,4 +1,5 @@
 const router = require('express').Router(),
+Cart = require('../models/cart'),
 User = require('../models/user'),
 passport = require('passport');
 
@@ -24,8 +25,11 @@ router.post('/register',(req,res) =>{
     }
     User.register(new User(newUser),req.body.password)
     .then(user =>{
-        passport.authenticate("local")(req,res,() =>{
-            res.redirect('/profile');
+        Cart.create({owner:user._id})
+        .then(cart =>{
+            passport.authenticate("local")(req,res,() =>{
+                res.redirect('/profile');
+        })
         })
     })
     .catch(err =>{
@@ -34,7 +38,7 @@ router.post('/register',(req,res) =>{
     })
 })
 
-//Login post request to login the user
+//Login post request to login the user, if you get a 401 error then the user has entered wrong username or password
 router.post('/login',passport.authenticate('local',{
     failureFlash:true,
     failureRedirect:'/auth/login'
