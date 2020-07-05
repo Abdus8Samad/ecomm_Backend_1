@@ -66,5 +66,10 @@ authRoutes = require('./routes/auth');
 app.use('/',indexRoutes);
 app.use('/auth',authRoutes);
 
+//Handle the 404 page
+app.get('*',(req,res) =>{
+    res.render('errorPage');
+})
+
 //Server started at port PORT
 app.listen(PORT,() => console.log(`Server listening at port ${PORT}`))
