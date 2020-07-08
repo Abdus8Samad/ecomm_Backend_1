@@ -15,7 +15,11 @@ passport.deserializeUser((id,done) =>{
 passport.use(new facebookStrategy({
     clientID:process.env.FACEBOOK_CLIENT_ID,
     clientSecret:process.env.FACEBOOK_CLIENT_SECRET,
+<<<<<<< HEAD
     callbackURL:'/auth/facebook/redirect'
+=======
+    callbackURL:'/facebook/redirect'
+>>>>>>> 094d1ff7e81cbc1a6617d8b1d8e7e874a3b1af28
 },( accessToken, refreshToken, profile, done ) =>{
     User.findOne({google:profile.id})
     .then(user =>{
