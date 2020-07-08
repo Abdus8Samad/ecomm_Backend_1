@@ -1,3 +1,6 @@
 <%- include('./partials/header') %> 
     <h1>Home Page</h1>
+    <% if(user){ %>
+        <%= user.username %>
+   <% } %> 
 <%- include('./partials/footer') %> 
